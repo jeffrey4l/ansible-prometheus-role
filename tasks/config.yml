@@ -1,0 +1,64 @@
+---
+- name: ensure etc folder
+  file:
+    path: "{{ item }}"
+    recurse: true
+    state: directory
+  with_items:
+    - "{{ prometheus_etc_path }}"
+    - "{{ prometheus_etc_path }}/rules"
+
+- name: ensure data folder
+  file:
+    path: "{{ prometheus_data_path }}"
+    recurse: true
+    state: directory
+    owner: "{{ prometheus_runas_user }}"
+    group: "{{ prometheus_runas_user }}"
+
+- name: copy prometheus.yml file
+  vars:
+    filename: prometheus.yml
+  template:
+    src: "{{ item }}"
+    dest: "{{ prometheus_etc_path }}/{{ filename }}"
+  with_first_found:
+    - files:
+        - "{{ filename }}.j2"
+      paths:
+        - "{{ playbook_dir }}/templates/{{ role_name }}"
+        - "{{ role_path }}/templates"
+  notify:
+    - check configure files
+    - reload prometheus service
+
+- name: copy prometheus.service
+  vars:
+    filename: prometheus.service
+  template:
+    src: "{{ item }}"
+    dest: /etc/systemd/system/prometheus.service
+  with_first_found:
+    - files:
+        - "{{ filename }}.j2"
+      paths:
+        - "{{ playbook_dir }}/templates/{{ role_name }}"
+        - "{{ role_path }}/templates"
+  notify:
+    - restart prometheus service
+
+- name: search files in templates/rules folder
+  find:
+    paths:
+      - "{{ role_path }}/templates/rules"
+      - "{{ playbook_dir }}/templates/rules"
+  register: rules
+
+- name: copy rules files
+  template:
+    src: "{{ item.path }}"
+    dest: "{{ prometheus_etc_path }}/rules/{{ item.path|basename }}"
+  with_items: "{{ rules.files }}"
+  notify:
+    - check configure rules
+    - reload prometheus service

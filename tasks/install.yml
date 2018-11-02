@@ -1,0 +1,24 @@
+---
+- name: ensure folder
+  file:
+    path: "{{ prometheus_bin_path }}"
+    state: directory
+
+- name: Download prometheus packages
+  get_url:
+    url: https://github.com/prometheus/prometheus/releases/download/v2.4.2/prometheus-2.4.2.linux-amd64.tar.gz
+    dest: /tmp/prometheus-2.4.2.linux-amd64.tar.gz
+    checksum: sha256:cd32b6862eab4b5b6c5ed81a2aa951ebeba8b35506418c21d1f5f18fa346fcd0
+  register: download_prometheus
+
+- name: unpack the package
+  unarchive:
+    src: /tmp/prometheus-2.4.2.linux-amd64.tar.gz
+    dest: /opt/prometheus
+    owner: root
+    group: root
+    remote_src: true
+    extra_opts:
+      - --strip-components=1
+  when:
+    - download_prometheus is changed

@@ -1,0 +1,6 @@
+---
+prometheus_bin_path: /opt/prometheus
+prometheus_etc_path: /etc/prometheus
+prometheus_data_path: /var/lib/prometheus
+
+prometheus_runas_user: root

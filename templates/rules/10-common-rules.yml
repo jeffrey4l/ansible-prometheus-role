@@ -1,0 +1,10 @@
+#jinja2:variable_start_string:'[%' , variable_end_string:'%]'
+---
+groups:
+  - name: common-record
+    rules:
+      - record: instance:node_cpus:count
+        expr: count(node_cpu{mode="idle"}) without (cpu,mode)
+
+      - record: instance:uptime
+        expr: time() - node_boot_time

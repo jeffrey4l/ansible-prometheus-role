@@ -1,0 +1,48 @@
+#jinja2:variable_start_string:'[%' , variable_end_string:'%]'
+---
+groups:
+  - name: default
+    rules:
+
+      - alert: InstanceIsDown
+        expr: up{job="node"} == 0
+        for: 5m
+        annotations:
+          summary: "Instance {{ $labels.instance }} down"
+          description: >
+            {{ $labels.instance }} of job {{ $labels.job }} has been down for more
+            than 5 minutes.
+
+      - alert: TargetNotReachable
+        expr: up{job!="node"} == 0
+        for: 5m
+        annotations:
+          summary: "Target {{ $labels.instance }} is not reachable"
+
+      - alert: Maximum filefd is too small
+        expr: node_filefd_maximum < 3000000
+        for: 5m
+        annotations:
+          summary: "Instance {{ $labels.intance }} max file descriptor is too small"
+          description: >
+            "Instance {{ $labels.intance }} max file descriptor is too small"
+
+      - alert: FDIsUsedTooMuch
+        expr: node_filefd_allocated / node_filefd_maximum > 0.5
+        for: 5m
+        annotations:
+          summary: "Instance {{ $labels.intance }} file decriptor is used too much"
+          description: >
+            "Instance {{ $labels.intance }} file decriptor is used too much"
+
+      - alert: NodeLoadIsTooHigh
+        expr: node_load15 / instance:node_cpus:count > 0.5
+        for: 5m
+        annotations:
+          summary: "Instance {{ $labels.intance }} load is too high"
+
+      - alert: NodeDiskFreeSizeIsTooLow
+        expr: node_filesystem_avail{device=~"^/.*"} / node_filesystem_size{device=~"^/.*"} < 0.15
+        for: 5m
+        annotations:
+          summary: "Instance {{ $labels.intance }} filesystem {{ $labels.mountpoint }} mounted from {{ $labels.device }} availiable is too low."

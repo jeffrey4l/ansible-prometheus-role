@@ -1,0 +1,14 @@
+---
+- include: "install.yml"
+
+- include: "config.yml"
+
+- name: flush handlers
+  meta: flush_handlers
+
+- name: ensure prometheus service is enabled
+  systemd:
+    name: prometheus
+    state: started
+    enabled: true
+# vim:ft=yaml

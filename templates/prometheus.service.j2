@@ -1,0 +1,15 @@
+[Unit]
+Description=prometheus service
+
+[Service]
+Type=simple
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart={{ prometheus_bin_path }}/prometheus \
+  --config.file={{ prometheus_etc_path }}/prometheus.yml \
+  --storage.tsdb.path={{ prometheus_data_path }} \
+  --web.console.templates={{ prometheus_bin_path }}/consoles \
+  --web.console.libraries={{ prometheus_bin_path }}/console_libraries
+User={{ prometheus_runas_user }}
+
+[Install]
+WantedBy=default.target

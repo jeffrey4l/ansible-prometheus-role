@@ -1,0 +1,38 @@
+# from role
+global:
+  scrape_interval: 60s
+  evaluation_interval: 60s
+
+rule_files:
+  - {{ prometheus_etc_path }}/rules/*.yml
+  - {{ prometheus_etc_path }}/rules/*.yaml
+
+alerting:
+  alertmanagers:
+{% if alertmanagers_targets is defined and alertmanagers_targets %}
+    - static_configs:
+        - targets:
+          {{ alertmanagers_targets | indent(10) }}
+{% endif %}
+
+scrape_configs:
+  - job_name: process
+    static_configs:
+{% for host in hostvars %}
+      - targets:
+          - {{ hostvars[host]['inventory_hostname'] }}:9256
+        labels:
+          hostname: {{ hostvars[host]['inventory_hostname'] }}
+{% endfor %}
+          
+
+  - job_name: node
+    static_configs:
+{% for host in hostvars %}
+      - targets:
+          - {{ hostvars[host]['inventory_hostname'] }}:9100
+        labels:
+          hostname: {{ hostvars[host]['inventory_hostname'] }}
+{% endfor %}
+
+# vim:ft=ansible
