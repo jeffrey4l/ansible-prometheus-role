@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    ignore_systemd_error: true
+  roles:
+    - role: ansible-prometheus-role

@@ -1,2 +1,32 @@
 ---
-# vars file for prometheus
+go_arch_map:
+  i386: '386'
+  x86_64: 'amd64'
+  aarch64: 'arm64'
+  armv7l: 'armv7'
+  armv6l: 'armv6'
+
+prometheus_versions:
+  prometheus-2.4.2.darwin-386.tar.gz: sha256:7e1632694098a7db6755e5e850cbfc497ab7deec54c6be0f1fef59f03f78bfb9
+  prometheus-2.4.2.darwin-amd64.tar.gz: sha256:87a6aed4829747f5f91843d33a92083a2936f5513b1f4053d20578a228675696
+  prometheus-2.4.2.dragonfly-amd64.tar.gz: sha256:ad3e520ff68dfa86f491340ef9f64c18963b59c23c9fa5e1776bac8af4a7b997
+  prometheus-2.4.2.freebsd-386.tar.gz: sha256:fff1bbbeba8c8f8e5737f534a3dc9a8e0b54043a214ea0a163347e5417c8a343
+  prometheus-2.4.2.freebsd-amd64.tar.gz: sha256:04419ebeed60f3b71be11f5337cd6cf027288cc74c360d1992a9bdabda96c8c9
+  prometheus-2.4.2.freebsd-armv6.tar.gz: sha256:851708d90b87ff8265c97764843d96264f152a9fbe27145e48dde4da0c0e78c7
+  prometheus-2.4.2.freebsd-armv7.tar.gz: sha256:6c2cb806862c5b80af3edd88054a34c48a3491c9bc21cccfac813a8e01894226
+  prometheus-2.4.2.linux-386.tar.gz: sha256:2b9d3e41bf1dd7734dbc665885972f571cb3461498c00f96231851ccdbb878c4
+  prometheus-2.4.2.linux-amd64.tar.gz: sha256:cd32b6862eab4b5b6c5ed81a2aa951ebeba8b35506418c21d1f5f18fa346fcd0
+  prometheus-2.4.2.linux-arm64.tar.gz: sha256:14e159bca9519d4c3a42409de2fc0d785f1e7be65dd0b6513d8a5dc3a1dc040a
+  prometheus-2.4.2.linux-armv5.tar.gz: sha256:62c0685c3c0a39eb6ca653419e92126b404c1d02cba61ef7ed5f52bfb05cfc83
+  prometheus-2.4.2.linux-armv6.tar.gz: sha256:5754a76f8bb4afdadb60ed9c0241b05e84d383ddb28292c1dd1ffebdfb97842b
+  prometheus-2.4.2.linux-armv7.tar.gz: sha256:536b6bbca1d537f133ce758a3580497296fab0231eab621b78227dc9120dca65
+  prometheus-2.4.2.linux-ppc64.tar.gz: sha256:76ae1c96a717cc32cdda5e37d31782bf9f34c0216a873bc33bfca05fdb44d1d4
+  prometheus-2.4.2.linux-ppc64le.tar.gz: sha256:0fe3233dad71bf6b6f5505dc354b10ea326014dd57f4a5b0d2e121a5783183cb
+  prometheus-2.4.2.netbsd-386.tar.gz: sha256:3a51c7cf3362cd637e755d6d353529f1381bb09cf34c017dd283dee6348f95ac
+  prometheus-2.4.2.netbsd-amd64.tar.gz: sha256:fe5b2132c604ae368d9abaebe24195b286db6cb4b9cde9339e58006daa88e3ca
+  prometheus-2.4.2.netbsd-armv6.tar.gz: sha256:10f1bb912ad3f67a217859df525273697f4febe6667586ef7f99d0178e6781d8
+  prometheus-2.4.2.netbsd-armv7.tar.gz: sha256:b8e794ebe62006357100ec1b3d2e534b318e4e444bdf86ac8aed1b0c6ef32fd0
+  prometheus-2.4.2.openbsd-386.tar.gz: sha256:1dc27185f637d78868556e88257f47dab4a1c4eac2e15852de6fd31371f82e51
+  prometheus-2.4.2.openbsd-amd64.tar.gz: sha256:afef1248146b685bcfe3eb712ae14ebc44538630e0296d9265e555b529e65e70
+  prometheus-2.4.2.windows-386.tar.gz: sha256:a6ea9814d19f9c0eddba1a22c99944743a3f14b72f99092f6856948accf82974
+  prometheus-2.4.2.windows-amd64.tar.gz: sha256:ca60e80e52692d6bb4850268f25f0e4f3e6ab5eeff98606aa8f6e931fab2e6d6

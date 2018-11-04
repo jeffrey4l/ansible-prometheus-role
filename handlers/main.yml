@@ -1,12 +1,16 @@
 ---
 - name: check configure files
-  shell: "{{ prometheus_bin_path }}/promtool check config {{ prometheus_etc_path }}/prometheus.yml"
+  command: "{{ prometheus_bin_path }}/promtool check config {{ prometheus_etc_path }}/prometheus.yml"
 
 - name: check configure rules
-  shell: "{{ prometheus_bin_path }}/promtool check rules {{ prometheus_etc_path }}/rules/*"
+  command: "{{ prometheus_bin_path }}/promtool check rules {{ prometheus_etc_path }}/rules/*"
 
 - name: restart prometheus service
   systemd: name=prometheus state=restarted daemon_reload=yes
+  check_mode: true
+  ignore_errors: "{{ ignore_systemd_error }}"
 
 - name: reload prometheus service
   systemd: name=prometheus state=reloaded
+  check_mode: true
+  ignore_errors: "{{ ignore_systemd_error }}"
