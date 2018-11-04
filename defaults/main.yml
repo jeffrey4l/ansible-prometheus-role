@@ -5,8 +5,10 @@ prometheus_data_path: /var/lib/prometheus
 
 prometheus_runas_user: root
 
+prometheus_version_latest: 2.4.3
+
 # Vaild options: [ 2.4.2, 2.4.3 ]
-prometheus_version: 2.4.2
+prometheus_version: "{{ prometheus_version_latest }}"
 # Valid options: [ i386, x86_64, aarch64, armv7l, armv6l ]
 prometheus_arch: "{{ ansible_architecture }}"
 # Valid options: [darwin, dragonfly, freebsd, linux, netbsd, openbsd, windows]
@@ -17,7 +19,6 @@ prometheus_filename: >-
 prometheus_checksum: "{{ prometheus_checksums[prometheus_version][prometheus_filename] }}"
 prometheus_download_url: >-
   https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/{{ prometheus_filename }}
-
 
 # Use for molecule unittest
 ignore_systemd_error: false
