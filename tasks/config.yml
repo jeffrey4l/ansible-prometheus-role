@@ -26,6 +26,7 @@
     - files:
         - "{{ filename }}.j2"
       paths:
+        - "{{ playbook_dir }}/templates/"
         - "{{ playbook_dir }}/templates/{{ role_name }}"
         - "{{ role_path }}/templates"
   notify:
@@ -42,6 +43,7 @@
     - files:
         - "{{ filename }}.j2"
       paths:
+        - "{{ playbook_dir }}/templates/"
         - "{{ playbook_dir }}/templates/{{ role_name }}"
         - "{{ role_path }}/templates"
   notify:
@@ -52,6 +54,7 @@
     paths:
       - "{{ role_path }}/templates/rules"
       - "{{ playbook_dir }}/templates/rules"
+      - "{{ playbook_dir }}/templates/{{ role_name }}rules"
   register: rules
 
 - name: copy rules files

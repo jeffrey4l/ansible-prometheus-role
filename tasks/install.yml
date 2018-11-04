@@ -4,16 +4,11 @@
     path: "{{ prometheus_bin_path }}"
     state: directory
 
-- debug:
-    var: prometheus_filename
-- debug:
-    var: prometheus_download_url
-
 - name: Download prometheus packages
   get_url:
     url: "{{ prometheus_download_url }}"
     dest: /tmp/{{ prometheus_filename }}
-    checksum: sha256:cd32b6862eab4b5b6c5ed81a2aa951ebeba8b35506418c21d1f5f18fa346fcd0
+    checksum: "{{ prometheus_checksum }}"
   register: download_prometheus
 
 - name: unpack the package

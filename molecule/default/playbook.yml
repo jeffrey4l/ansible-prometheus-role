@@ -3,5 +3,15 @@
   hosts: all
   vars:
     ignore_systemd_error: true
+    prometheus_version: 2.4.2
+  roles:
+    - role: ansible-prometheus-role
+
+- name: Converge
+  hosts: all
+  vars:
+    ignore_systemd_error: true
+    prometheus_version: 2.4.3
+    prometheus_checksum: sha256:3aa063498ab3b4d1bee103d80098ba33d02b3fed63cb46e47e1d16290356db8a
   roles:
     - role: ansible-prometheus-role

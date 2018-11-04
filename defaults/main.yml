@@ -8,13 +8,13 @@ prometheus_runas_user: root
 # Vaild options: [ 2.4.2, 2.4.3 ]
 prometheus_version: 2.4.2
 # Valid options: [ i386, x86_64, aarch64, armv7l, armv6l ]
-prometheus_arch: x86_64
+prometheus_arch: "{{ ansible_architecture }}"
 # Valid options: [darwin, dragonfly, freebsd, linux, netbsd, openbsd, windows]
-prometheus_os: linux
+prometheus_os: "{{ ansible_system|lower }}"
 
 prometheus_filename: >-
-  prometheus-{{ prometheus_version }}.{{ prometheus_os }}-{{ go_arch_map[prometheus_arch | default(ansible_architecture)] }}.tar.gz
-prometheus_checksum: "{{ prometheus_checksums[prometheus_filename] }}"
+  prometheus-{{ prometheus_version }}.{{ prometheus_os }}-{{ go_arch_map[prometheus_arch] }}.tar.gz
+prometheus_checksum: "{{ prometheus_checksums[prometheus_version][prometheus_filename] }}"
 prometheus_download_url: >-
   https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/{{ prometheus_filename }}
 
