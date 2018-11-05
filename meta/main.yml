@@ -47,6 +47,9 @@ galaxy_info:
   #   - 99.99
 
   galaxy_tags:
+    - alerting
+    - metrics
+    - molecule
     - monitoring
     - prometheus
 
