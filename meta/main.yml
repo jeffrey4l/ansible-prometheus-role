@@ -1,8 +1,9 @@
 ---
 galaxy_info:
-  author: your name
+  author: jeffrey4l
   description: your description
   company: your company (optional)
+  role_name: prometheus
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
