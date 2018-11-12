@@ -3,7 +3,7 @@
   command: "{{ prometheus_bin_path }}/promtool check config {{ prometheus_etc_path }}/prometheus.yml"
 
 - name: check configure rules
-  command: "{{ prometheus_bin_path }}/promtool check rules {{ prometheus_etc_path }}/rules/*"
+  command: "bash -c '{{ prometheus_bin_path }}/promtool check rules {{ prometheus_etc_path }}/rules/*'"
 
 - name: restart prometheus service
   systemd: name=prometheus state=restarted daemon_reload=yes

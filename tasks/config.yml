@@ -60,7 +60,7 @@
 - name: copy rules files
   template:
     src: "{{ item.path }}"
-    dest: "{{ prometheus_etc_path }}/rules/{{ item.path|basename }}"
+    dest: "{{ prometheus_etc_path }}/rules/{{ (item.path|basename|splitext)[0] }}"
   with_items: "{{ rules.files }}"
   notify:
     - check configure rules
