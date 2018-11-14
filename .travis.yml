@@ -1,0 +1,13 @@
+---
+language: python
+sudo: required
+
+services:
+  - docker
+
+env:
+script:
+  - pip install ansible
+  - pip install -r test-requirements.txt
+  - sudo sed -i '/^Defaults\tsecure_path.*$/d' /etc/sudoers
+  - sudo --preserve-env $(which python) $(which molecule) test
