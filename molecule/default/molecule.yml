@@ -6,8 +6,12 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: instance
+  - name: test-prometheus-role-centos7
     image: centos:7
+  - name: test-prometheus-role-ubuntu-1804
+    image: ubuntu:18.04
+  - name: test-prometheus-role-ubuntu-1604
+    image: ubuntu:16.04
 provisioner:
   name: ansible
   lint:
