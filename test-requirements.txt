@@ -1,1 +1,3 @@
 molecule
+flake8
+docker
