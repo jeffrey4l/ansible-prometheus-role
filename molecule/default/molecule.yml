@@ -8,12 +8,12 @@ lint:
   options:
     config-file: .yamllint
 platforms:
-  - name: test-prometheus-role-centos7
+  - name: test-prometheus-role-EL-7
     image: centos:7
-  - name: test-prometheus-role-ubuntu-1804
-    image: ubuntu:18.04
-  - name: test-prometheus-role-ubuntu-1604
-    image: ubuntu:16.04
+  - name: test-prometheus-role-ubuntu-xenial
+    image: ubuntu:xenial
+  - name: test-prometheus-role-ubuntu-bionic
+    image: ubuntu:bionic
 provisioner:
   name: ansible
   lint:
