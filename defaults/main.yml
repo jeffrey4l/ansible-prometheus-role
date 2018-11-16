@@ -5,9 +5,17 @@ prometheus_data_path: /var/lib/prometheus
 
 prometheus_runas_user: root
 
-prometheus_version_latest: 2.4.3
+prometheus_version_latest: 2.5.0
 
-# Vaild options: [ 2.4.2, 2.4.3 ]
+# Vaild options: [
+#   2.5.0,
+#   2.4.3, 2.4.2, 2.4.1, 2.4.0,
+#   2.3.2, 2.3.1, 2.3.0,
+#   2.2.1, 2.2.0, 2.1.0, 2.0.0,
+#   1.8.2, 1.8.1, 1.8.0,
+#   1.7.2, 1.7.1, 1.7.0,
+#   1.6.3, 1.6.1, 1.6.0,
+# ]
 prometheus_version: "{{ prometheus_version_latest }}"
 # Valid options: [ i386, x86_64, aarch64, armv7l, armv6l ]
 prometheus_arch: "{{ ansible_architecture }}"
