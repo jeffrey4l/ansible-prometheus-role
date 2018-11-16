@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/jeffrey4l/kolla.svg?branch=master)](https://travis-ci.org/jeffrey4l/kolla)
+[![Build Status](https://travis-ci.org/jeffrey4l/ansible-prometheus-role.svg?branch=master)](https://travis-ci.org/jeffrey4l/ansible-prometheus-role)
 
 Ansible Prometheus Role
 =======================
