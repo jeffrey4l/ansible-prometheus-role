@@ -1,4 +1,3 @@
-# yamllint disable rule:line-length
 ---
 prometheus-2.4.3.darwin-386.tar.gz: sha256:d60ff64c807708bf0489cf5d94757d69e2a989bcce370220ccea68766370f526
 prometheus-2.4.3.darwin-amd64.tar.gz: sha256:760927f056b169a119b7ce8ba053108aa251be48373d1534f68f3d164df83f39

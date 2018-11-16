@@ -1,0 +1,24 @@
+---
+prometheus-2.1.0.darwin-386.tar.gz: sha256:b0241584f671aa1d26f9dcd9b24ef2db68d658b29186115eb51883e886a0d4dd
+prometheus-2.1.0.darwin-amd64.tar.gz: sha256:c8cd03fdb34e978f8a483753cf8dfebb4be4c2492a7b3ada7f26e491d773fd44
+prometheus-2.1.0.dragonfly-amd64.tar.gz: sha256:0d441bf47220026b9acbd67d015c8680e6af886109b5ab255ad5e2bbd7e56626
+prometheus-2.1.0.freebsd-386.tar.gz: sha256:75785818774712c9d68986de0d1f6f01f318d00a975b93e1d22a1a61b246fc54
+prometheus-2.1.0.freebsd-amd64.tar.gz: sha256:f2b76f2e2072316cf0c067d163cd828c6adaa5bde16b8846e7c853a51852101a
+prometheus-2.1.0.freebsd-armv6.tar.gz: sha256:0b47bce1f75d92e5fbc2b525fa8e4a760f7f3ca9c751b6adec20fa1269cf89db
+prometheus-2.1.0.freebsd-armv7.tar.gz: sha256:69f648314aba227ba88c5c62dbedc0ee8e5a13d5c23717266ed235d4e3977324
+prometheus-2.1.0.linux-386.tar.gz: sha256:033c89199bda2c8f4be096c2b3db7d6f1b2b67e869f949e82d5d20ba7e037fb4
+prometheus-2.1.0.linux-amd64.tar.gz: sha256:f181f619c9a8e0750c1ac940eb00a0881cc50386d896f06f159e9a5b68db60a0
+prometheus-2.1.0.linux-arm64.tar.gz: sha256:96c46e91729003b12c67402adc13ccda135236e157908eaf9b18ec5a96c83467
+prometheus-2.1.0.linux-armv5.tar.gz: sha256:5a96ae44a5fd605c0ed6744f92171d705ac4336550565131f703cac850708cd6
+prometheus-2.1.0.linux-armv6.tar.gz: sha256:0dfef8b754bd1c6031c35be92d885045e0657748066b455ec05480063305e0c5
+prometheus-2.1.0.linux-armv7.tar.gz: sha256:c7ebe3f817ef10d86a60ceec235fac7c944486f09babcaecec01418587e7bc5e
+prometheus-2.1.0.linux-ppc64.tar.gz: sha256:4f6cd4ac339ba19964fdd1bb96857efb33d0349aa51345470b7e76fcb4f477b2
+prometheus-2.1.0.linux-ppc64le.tar.gz: sha256:2b227bb176aea3e4ce837316ddc3ccae2e3efe473894399c71213171d815cab1
+prometheus-2.1.0.netbsd-386.tar.gz: sha256:b903118572ab231318695cf8815642966282cf093f27a188c5c160c0d646ec9a
+prometheus-2.1.0.netbsd-amd64.tar.gz: sha256:f6fc04375881cd98e7b71c2f172b0d2ee3861b43f2c94f3a92020e190ab294c0
+prometheus-2.1.0.netbsd-armv6.tar.gz: sha256:5820b17ef3a4593e3e13e0db5c3fe4fca5d3b01693baa4dfc68f1be4f9cfcc9d
+prometheus-2.1.0.netbsd-armv7.tar.gz: sha256:8ee6d9a7a01ef37b03f4640fddaf80685c9f07a8f8600c19968eace72917ec21
+prometheus-2.1.0.openbsd-386.tar.gz: sha256:0fa802e2181c967e583432da5cb3a921850f533f08ea835dd5089cfb817d14b1
+prometheus-2.1.0.openbsd-amd64.tar.gz: sha256:7b67e35782d1c34b5256e4e5905362fe6440138d929ebc3d09bcaf6f3841fbf0
+prometheus-2.1.0.windows-386.tar.gz: sha256:6b95cec284f3bf9a55b010414760362e6adb97387ab9ef5a342c9cf8a82638a1
+prometheus-2.1.0.windows-amd64.tar.gz: sha256:0fd5c7f95c78a58fe4e96768e726f6fc203dc66218228ce931d851f395ca65bc
