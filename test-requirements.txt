@@ -1,3 +1,5 @@
 molecule
 flake8
 docker
+lxc-python2
+pytest<3.10.0

@@ -1,0 +1,27 @@
+---
+- name: Create
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Create molecule instance(s)
+      lxc_container:
+        name: "{{ item.name }}"
+        container_log: false
+        template: "{{ item.template }}"
+        state: started
+        template_options: "{{ item.template_options }}"
+        container_command: "{{ item.container_command }}"
+      async: 600
+      poll: 0
+      register: create_jobs
+      with_items: "{{ molecule_yml.platforms }}"
+
+    - name: wait create jobs to be done
+      async_status:
+        jid: "{{ item.ansible_job_id }}"
+      register: job_result
+      until: job_result.finished
+      retries: 120
+      delay: 5
+      with_items: "{{ create_jobs.results }}"

@@ -1,0 +1,46 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: lxc
+lint:
+  name: yamllint
+platforms:
+  - name: centos7
+    template: download
+    template_options: >-
+      --dist centos
+      --release 7
+      --arch amd64
+    container_command: |
+      until ping -c1 baidu.com &>/dev/null; do :; done
+  - name: ubuntu-xenial
+    template: download
+    template_options: >-
+      --dist ubuntu
+      --release xenial
+      --arch amd64
+    container_command: |
+      until ping -c1 baidu.com &>/dev/null; do :; done
+      apt update
+      apt install -y python-minimal
+  - name: ubuntu-bionic
+    template: download
+    template_options: >-
+      --dist ubuntu
+      --release bionic
+      --arch amd64
+    container_command: |
+      until ping -c1 baidu.com &>/dev/null; do :; done
+      apt update
+      apt install -y python-minimal
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+scenario:
+  name: lxc
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
