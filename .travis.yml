@@ -1,14 +1,12 @@
 ---
+dist: xenial
 language: python
 sudo: required
-
-services:
-  - docker
-
-env:
 script:
-  - pip install ansible
-  - pip install -r test-requirements.txt
   # check https://github.com/travis-ci/travis-ci/issues/1350
   - sudo sed -i '/^Defaults\tsecure_path.*$/d' /etc/sudoers
-  - sudo --preserve-env $(which python) $(which molecule) test
+  - sudo apt-get -qq update
+  - sudo apt-get install -y lxc lxc-templates debootstrap lxc-dev
+  - pip install ansible
+  - pip install -r test-requirements.txt
+  - sudo -E molecule test -s lxc
