@@ -14,11 +14,21 @@ platforms:
       --arch amd64
     container_command: |
       until ping -c1 baidu.com &>/dev/null; do :; done
-  - name: ubuntu1604
+  - name: ubuntu-xenial
     template: download
     template_options: >-
       --dist ubuntu
       --release xenial
+      --arch amd64
+    container_command: |
+      until ping -c1 baidu.com &>/dev/null; do :; done
+      apt update
+      apt install -y python-minimal
+  - name: ubuntu-bionic
+    template: download
+    template_options: >-
+      --dist ubuntu
+      --release bionic
       --arch amd64
     container_command: |
       until ping -c1 baidu.com &>/dev/null; do :; done

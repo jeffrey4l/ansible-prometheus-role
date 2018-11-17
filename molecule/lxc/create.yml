@@ -17,8 +17,6 @@
       register: create_jobs
       with_items: "{{ molecule_yml.platforms }}"
 
-    - debug: var=create_jobs.results
-
     - name: wait create jobs to be done
       async_status:
         jid: "{{ item.ansible_job_id }}"
