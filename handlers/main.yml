@@ -7,10 +7,6 @@
 
 - name: restart prometheus service
   systemd: name=prometheus state=restarted daemon_reload=yes
-  check_mode: true
-  ignore_errors: "{{ ignore_systemd_error }}"
 
 - name: reload prometheus service
   systemd: name=prometheus state=reloaded
-  check_mode: true
-  ignore_errors: "{{ ignore_systemd_error }}"
