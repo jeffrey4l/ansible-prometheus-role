@@ -7,6 +7,7 @@
   with_items:
     - "{{ prometheus_etc_path }}"
     - "{{ prometheus_etc_path }}/rules"
+    - /etc/default
 
 - name: ensure data folder
   file:
@@ -15,6 +16,19 @@
     state: directory
     owner: "{{ prometheus_runas_user }}"
     group: "{{ prometheus_runas_user }}"
+
+- name: copy /etc/dfault/prometheus file
+  template:
+    src: "{{ item }}"
+    dest: /etc/default/prometheus
+  with_first_found:
+    - files:
+        - "default_prometheus.j2"
+      paths:
+        - "{{ playbook_dir }}/templates/{{ role_name }}"
+        - "{{ role_path }}/templates"
+  notify:
+    - restart prometheus service
 
 - name: copy prometheus.yml file
   vars:
