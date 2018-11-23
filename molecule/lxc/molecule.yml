@@ -6,7 +6,7 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: centos7
+  - name: test-prometheus-role-centos7
     template: download
     template_options: >-
       --dist centos
@@ -14,7 +14,7 @@ platforms:
       --arch amd64
     container_command: |
       until ping -c1 baidu.com &>/dev/null; do :; done
-  - name: ubuntu-xenial
+  - name: test-prometheus-role-ubuntu-xenial
     template: download
     template_options: >-
       --dist ubuntu
@@ -24,7 +24,7 @@ platforms:
       until ping -c1 baidu.com &>/dev/null; do :; done
       apt update
       apt install -y python-minimal
-  - name: ubuntu-bionic
+  - name: test-prometheus-role-ubuntu-bionic
     template: download
     template_options: >-
       --dist ubuntu

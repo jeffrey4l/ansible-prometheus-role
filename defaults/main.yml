@@ -27,3 +27,6 @@ prometheus_filename: >-
 prometheus_checksum: "{{ prometheus_checksums[prometheus_version][prometheus_filename] }}"
 prometheus_download_url: >-
   https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/{{ prometheus_filename }}
+
+# Valid options: [ remote, local ]
+download_mode: remote
