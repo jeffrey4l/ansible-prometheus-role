@@ -2,7 +2,7 @@
 galaxy_info:
   author: jeffrey4l
   description: Ansible role to install prometheus server.
-  company: your company (optional)
+  company: jeffrey4l
   role_name: prometheus
 
   # If the issue tracker for your role is not on github, uncomment the
