@@ -20,6 +20,7 @@
       vars:
         prometheus_version: 2.5.0
         download_mode: locally
+        prometheus_runas_user: prometheus
       include_role:
         name: ansible-prometheus-role
 

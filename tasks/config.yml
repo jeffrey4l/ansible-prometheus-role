@@ -9,6 +9,25 @@
     - "{{ prometheus_etc_path }}/rules"
     - /etc/default
 
+- name: check the existence of prometheus user
+  command: "getent passwd {{ prometheus_runas_user }}"
+  changed_when: false
+  failed_when: false
+  register: check_user
+
+- name: create prometheus user
+  vars:
+    managed_comment: "Managed by ansible prometheus role"
+  user:
+    name: "{{ prometheus_runas_user }}"
+    shell: /usr/sbin/nologin
+    home: "{{ prometheus_data_path }}"
+    create_home: false
+    comment: "{{ managed_comment }}"
+  when:
+    - prometheus_runas_user != 'root'
+    - check_user.rc != 0 or check_user.stdout.find(managed_comment) != -1
+
 - name: ensure data folder
   file:
     path: "{{ prometheus_data_path }}"
