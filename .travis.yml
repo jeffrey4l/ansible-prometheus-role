@@ -10,4 +10,6 @@ script:
   - sudo apt-get install -y lxc lxc-templates debootstrap lxc-dev
   - pip install ansible
   - pip install -r test-requirements.txt
+  - echo -ne "travis_fold:start:molecule_test\\r"
   - sudo -E molecule test -s lxc
+  - echo -ne "travis_fold:end:molecule_test\\r"
