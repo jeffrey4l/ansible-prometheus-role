@@ -11,3 +11,6 @@ script:
   - pip install ansible
   - pip install -r test-requirements.txt
   - sudo -E molecule test -s lxc
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
