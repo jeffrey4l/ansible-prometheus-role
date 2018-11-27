@@ -22,6 +22,7 @@
   when:
     - check_prometheus.stat.exists
     - check_prometheus_version is success
+    - not ansible_check_mode
 
 - name: Download prometheus packages remotely
   get_url:

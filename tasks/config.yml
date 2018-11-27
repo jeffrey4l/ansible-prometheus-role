@@ -25,6 +25,7 @@
     create_home: false
     comment: "{{ managed_comment }}"
   when:
+    - not ansible_check_mode
     - prometheus_runas_user != 'root'
     - check_user.rc != 0 or check_user.stdout.find(managed_comment) != -1
 
