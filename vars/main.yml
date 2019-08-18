@@ -7,6 +7,9 @@ go_arch_map:
   armv6l: 'armv6'
 
 prometheus_checksums:
+  2.11.2: "{{ lookup('file', role_path ~ '/vars/versions/2.11.2.sha256sums.yml')|from_yaml }}"
+  2.11.1: "{{ lookup('file', role_path ~ '/vars/versions/2.11.1.sha256sums.yml')|from_yaml }}"
+  2.11.0: "{{ lookup('file', role_path ~ '/vars/versions/2.11.0.sha256sums.yml')|from_yaml }}"
   2.10.0: "{{ lookup('file', role_path ~ '/vars/versions/2.10.0.sha256sums.yml')|from_yaml }}"
   2.9.2: "{{ lookup('file', role_path ~ '/vars/versions/2.9.2.sha256sums.yml')|from_yaml }}"
   2.9.1: "{{ lookup('file', role_path ~ '/vars/versions/2.9.1.sha256sums.yml')|from_yaml }}"

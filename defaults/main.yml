@@ -5,9 +5,10 @@ prometheus_data_path: /var/lib/prometheus
 
 prometheus_runas_user: root
 
-prometheus_version_latest: 2.10.0
+prometheus_version_latest: 2.11.2
 
 # Vaild options: [
+#   2.11.0, 2.11.1, 2.11.2
 #   2.10.0
 #   2.9.0, 2.9.1, 2.9.2
 #   2.8.0, 2.8.1, 2.8.2
