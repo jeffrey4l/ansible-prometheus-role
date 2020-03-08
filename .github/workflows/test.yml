@@ -1,0 +1,22 @@
+---
+name: test deploy prometheus
+
+on:
+  - push
+
+jobs:
+  test_deploy_prometheus:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: prepare env
+        run: |
+          #!/bin/bash
+          sudo apt -qq update
+          sudo apt -qq -y install ansible
+          sudo ansible-galaxy install geerlingguy.docker
+
+      - name: Run ansible deployment playbooks
+        run: |
+          #!/bin/bash
+          sudo -E ansible-playbook -i localhost, -c local -b tests/config.yml

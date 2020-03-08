@@ -4,8 +4,8 @@
     name: prometheus_check_config
     image: "{{ prometheus_image_fullname }}"
     entrypoint:
+      - /bin/promtool
     command:
-      - /bin/prometheus
       - check
       - config
       - /etc/prometheus/prometheus.yml
@@ -13,15 +13,15 @@
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - "{{ prometheus_etc_path }}/prometheus.yml:/etc/prometheus/prometheus.yml"
-      - "{{ prometheus_data_path }}:/var/lib/prometheus"
+      - "{{ prometheus_data_path }}:/prometheus"
 
 - name: check configure rules
   docker_container:
-    name: prometheus_check_config
+    name: prometheus_check_rules
     image: "{{ prometheus_image_fullname }}"
     entrypoint:
-    commands:
-      - /bin/prometheus
+      - /bin/promtool
+    command:
       - check
       - rules
       - /etc/prometheus/rules/*
@@ -29,7 +29,7 @@
     volume:
       - /etc/localtime:/etc/localtime:ro
       - "{{ prometheus_etc_path }}/prometheus.yml:/etc/prometheus/prometheus.yml"
-      - "{{ prometheus_data_path }}:/var/lib/prometheus"
+      - "{{ prometheus_data_path }}:/prometheus"
 
 - name: restart prometheus service
   docker_container:

@@ -3,11 +3,10 @@
   docker_container:
     name: prometheus
     image: "{{ prometheus_image_fullname }}"
-    entrypoint:
     command: "{{ prometheus_args }}"
     user: root
     network_mode: host
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - "{{ prometheus_etc_path }}/prometheus.yml:/etc/prometheus/prometheus.yml"
-      - "{{ prometheus_data_path }}:/var/lib/prometheus"
+      - "{{ prometheus_data_path }}:/prometheus"

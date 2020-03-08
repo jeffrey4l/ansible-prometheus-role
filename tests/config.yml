@@ -1,6 +1,14 @@
 ---
 - hosts: all
   tasks:
+    - name: setup docker serivce
+      import_role:
+        name: geerlingguy.docker
+
+    - name: install python-docker
+      package:
+        name: python-docker
+
     - name: start prometheus service
       import_role:
         name: prometheus
