@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/jeffrey4l/ansible-prometheus-role.svg?branch=master)](https://travis-ci.org/jeffrey4l/ansible-prometheus-role)
+![test deploy prometheus](https://github.com/jeffrey4l/ansible-prometheus-role/workflows/test%20deploy%20prometheus/badge.svg)
 
 Ansible Prometheus Role
 =======================
@@ -13,10 +13,8 @@ Requirements
 Role Variables
 --------------
 
-    prometheus_bin_path: /opt/prometheus
     prometheus_etc_path: /etc/prometheus
     prometheus_data_path: /var/lib/prometheus
-    prometheus_version: 2.5.0
 
 Dependencies
 ------------
@@ -28,10 +26,10 @@ Example Playbook
 
     - name: Install prometheus server
       hosts: all
-      vars:
-        prometheus_version: 2.4.2
-      roles:
-        - role: ansible-prometheus-role
+      tasks:
+        - name: install prometheus service
+          import_role:
+            name: jeffrey4l.prometheus
 
 License
 -------
