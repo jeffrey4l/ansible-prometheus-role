@@ -1,12 +1,43 @@
 ---
 - name: check configure files
-  command: "{{ prometheus_bin_path }}/promtool check config {{ prometheus_etc_path }}/prometheus.yml"
+  docker_container:
+    name: prometheus_check_config
+    image: "{{ prometheus_image_fullname }}"
+    entrypoint:
+    command:
+      - /bin/prometheus
+      - check
+      - config
+      - /etc/prometheus/prometheus.yml
+    detach: false
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - "{{ prometheus_etc_path }}/prometheus.yml:/etc/prometheus/prometheus.yml"
+      - "{{ prometheus_data_path }}:/var/lib/prometheus"
 
 - name: check configure rules
-  command: "bash -c '{{ prometheus_bin_path }}/promtool check rules {{ prometheus_etc_path }}/rules/*'"
+  docker_container:
+    name: prometheus_check_config
+    image: "{{ prometheus_image_fullname }}"
+    entrypoint:
+    commands:
+      - /bin/prometheus
+      - check
+      - rules
+      - /etc/prometheus/rules/*
+    detach: false
+    volume:
+      - /etc/localtime:/etc/localtime:ro
+      - "{{ prometheus_etc_path }}/prometheus.yml:/etc/prometheus/prometheus.yml"
+      - "{{ prometheus_data_path }}:/var/lib/prometheus"
 
 - name: restart prometheus service
-  systemd: name=prometheus state=restarted daemon_reload=yes
+  docker_container:
+    name: prometheus
+    restart: true
 
 - name: reload prometheus service
-  systemd: name=prometheus state=reloaded
+  docker_container:
+    name: prometheus
+    force_kill: true
+    kill_signal: SIGHUP

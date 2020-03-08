@@ -7,48 +7,12 @@
   with_items:
     - "{{ prometheus_etc_path }}"
     - "{{ prometheus_etc_path }}/rules"
-    - /etc/default
-
-- name: check the existence of prometheus user
-  command: "getent passwd {{ prometheus_runas_user }}"
-  changed_when: false
-  failed_when: false
-  register: check_user
-
-- name: create prometheus user
-  vars:
-    managed_comment: "Managed by ansible prometheus role"
-  user:
-    name: "{{ prometheus_runas_user }}"
-    shell: /usr/sbin/nologin
-    home: "{{ prometheus_data_path }}"
-    create_home: false
-    comment: "{{ managed_comment }}"
-  when:
-    - not ansible_check_mode
-    - prometheus_runas_user != 'root'
-    - check_user.rc != 0 or check_user.stdout.find(managed_comment) != -1
 
 - name: ensure data folder
   file:
     path: "{{ prometheus_data_path }}"
     recurse: true
     state: directory
-    owner: "{{ prometheus_runas_user }}"
-    group: "{{ prometheus_runas_user }}"
-
-- name: copy /etc/dfault/prometheus file
-  template:
-    src: "{{ item }}"
-    dest: /etc/default/prometheus
-  with_first_found:
-    - files:
-        - "default_prometheus.j2"
-      paths:
-        - "{{ playbook_dir }}/templates/{{ role_name }}"
-        - "{{ role_path }}/templates"
-  notify:
-    - restart prometheus service
 
 - name: copy prometheus.yml file
   vars:
@@ -66,22 +30,6 @@
   notify:
     - check configure files
     - reload prometheus service
-
-- name: copy prometheus.service
-  vars:
-    filename: prometheus.service
-  template:
-    src: "{{ item }}"
-    dest: /etc/systemd/system/prometheus.service
-  with_first_found:
-    - files:
-        - "{{ filename }}.j2"
-      paths:
-        - "{{ playbook_dir }}/templates/"
-        - "{{ playbook_dir }}/templates/{{ role_name }}"
-        - "{{ role_path }}/templates"
-  notify:
-    - restart prometheus service
 
 - name: search files in templates/rules folder
   find:

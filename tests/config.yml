@@ -1,0 +1,6 @@
+---
+- hosts: all
+  tasks:
+    - name: start prometheus service
+      import_role:
+        name: prometheus

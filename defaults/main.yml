@@ -1,41 +1,22 @@
 ---
-prometheus_bin_path: /opt/prometheus
 prometheus_etc_path: /etc/prometheus
 prometheus_data_path: /var/lib/prometheus
 
-prometheus_runas_user: root
+docker_registry: ''
+prometheus_image_namespace: "prom"
+prometheus_image_name: "prometheus"
+prometheus_image_tag: "latest"
 
-prometheus_version_latest: 2.11.2
+docker_force_pull: true
 
-# Vaild options: [
-#   2.11.0, 2.11.1, 2.11.2
-#   2.10.0
-#   2.9.0, 2.9.1, 2.9.2
-#   2.8.0, 2.8.1, 2.8.2
-#   2.7.0, 2.7.1, 2.7.2
-#   2.6.0, 2.6.1
-#   2.5.0,
-#   2.4.3, 2.4.2, 2.4.1, 2.4.0,
-#   2.3.2, 2.3.1, 2.3.0,
-#   2.2.1, 2.2.0, 2.1.0, 2.0.0,
-# ]
-prometheus_version: "{{ prometheus_version_latest }}"
-# Valid options: [ i386, x86_64, aarch64, armv7l, armv6l ]
-prometheus_arch: "{{ ansible_architecture }}"
-# Valid options: [darwin, dragonfly, freebsd, linux, netbsd, openbsd, windows]
-prometheus_os: "{{ ansible_system|lower }}"
+_prometheus_image_fullname: >-
+  {{ docker_registry ~ '/' if docker_registry else '' }}
+  {{ prometheus_image_namespace }}/{{ prometheus_image_name }}:{{ prometheus_image_tag }}
 
-prometheus_filename: >-
-  prometheus-{{ prometheus_version }}.{{ prometheus_os }}-{{ go_arch_map[prometheus_arch] }}.tar.gz
-prometheus_checksum: "{{ prometheus_checksums[prometheus_version][prometheus_filename] }}"
-prometheus_download_url: >-
-  https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/{{ prometheus_filename }}
-
-# Valid options: [ remote, local ]
-download_mode: remote
+prometheus_image_fullname: "{{ _prometheus_image_fullname.replace(' ', '') }}"
 
 prometheus_args: >-
-  --config.file={{ prometheus_etc_path }}/prometheus.yml
-  --storage.tsdb.path={{ prometheus_data_path }}
-  --web.console.templates={{ prometheus_bin_path }}/consoles
-  --web.console.libraries={{ prometheus_bin_path }}/console_libraries
+  --config.file=/etc/prometheus/prometheus.yml
+  --storage.tsdb.path=/var/lib/prometheus
+  --web.console.templates=/etc/prometheus/consoles
+  --web.console.libraries=/etc/prometheus/console_libraries
