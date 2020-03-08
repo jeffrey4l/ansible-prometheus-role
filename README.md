@@ -13,8 +13,10 @@ Requirements
 Role Variables
 --------------
 
-    prometheus_etc_path: /etc/prometheus
-    prometheus_data_path: /var/lib/prometheus
+```yaml
+prometheus_etc_path: /etc/prometheus
+prometheus_data_path: /var/lib/prometheus
+```
 
 Dependencies
 ------------
@@ -24,12 +26,14 @@ nothing
 Example Playbook
 ----------------
 
-    - name: Install prometheus server
-      hosts: all
-      tasks:
-        - name: install prometheus service
-          import_role:
-            name: jeffrey4l.prometheus
+```yaml
+- name: Install prometheus server
+  hosts: all
+  tasks:
+    - name: install prometheus service
+      import_role:
+        name: jeffrey4l.prometheus
+```
 
 License
 -------
