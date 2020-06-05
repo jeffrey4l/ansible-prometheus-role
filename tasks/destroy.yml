@@ -1,0 +1,8 @@
+---
+- name: remove prometheus container
+  docker_container:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - prometheus_check_config
+    - prometheus_check_rules

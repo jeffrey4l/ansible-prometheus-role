@@ -1,13 +1,13 @@
 ---
-prometheus_etc_path: /etc/prometheus
-prometheus_data_path: /var/lib/prometheus
-
+##########
+# Docker #
+##########
 docker_registry: ''
 prometheus_image_namespace: "prom"
 prometheus_image_name: "prometheus"
 prometheus_image_tag: "latest"
 
-docker_force_pull: true
+prometheus_image_force_pull: true
 
 _prometheus_image_fullname: >-
   {{ docker_registry ~ '/' if docker_registry else '' }}
@@ -15,8 +15,25 @@ _prometheus_image_fullname: >-
 
 prometheus_image_fullname: "{{ _prometheus_image_fullname.replace(' ', '') }}"
 
+prometheus_container_name: "prometheus"
+
+##############
+# Prometheus #
+##############
+prometheus_etc_path: "/etc/{{ prometheus_container_name }}"
+prometheus_data_path: "/var/lib/{{ prometheus_container_name }}"
+
+prometheus_yaml_file: prometheus.yml
+prometheus_rule_files: []
+
+prometheus_listen_host: 0.0.0.0
+prometheus_listen_port: 9090
+prometheus_storage_tsdb_retention_time: 30d
+
 prometheus_args: >-
   --config.file=/etc/prometheus/prometheus.yml
+  --web.listen-address={{ prometheus_listen_host }}:{{ prometheus_listen_port }}
+  --storage.tsdb.retention.time={{ prometheus_storage_tsdb_retention_time }}
   --storage.tsdb.path=/var/lib/prometheus
   --web.console.templates=/etc/prometheus/consoles
   --web.console.libraries=/etc/prometheus/console_libraries

@@ -1,12 +1,13 @@
 ---
 - name: star prometheus container
   docker_container:
-    name: prometheus
+    name: "{{ prometheus_container_name }}"
     image: "{{ prometheus_image_fullname }}"
     command: "{{ prometheus_args }}"
     user: root
     network_mode: host
+    pull: "{{ prometheus_image_force_pull }}"
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - "{{ prometheus_etc_path }}/prometheus.yml:/etc/prometheus/prometheus.yml"
-      - "{{ prometheus_data_path }}:/prometheus"
+      - "{{ prometheus_etc_path }}/prometheus.yml:/etc/prometheus/prometheus.yml:ro"
+      - "{{ prometheus_data_path }}:/prometheus:ro"

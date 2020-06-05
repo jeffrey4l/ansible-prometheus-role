@@ -15,14 +15,12 @@
     state: directory
 
 - name: copy prometheus.yml file
-  vars:
-    filename: prometheus.yml
   template:
     src: "{{ item }}"
-    dest: "{{ prometheus_etc_path }}/{{ filename }}"
+    dest: "{{ prometheus_etc_path }}/prometheus.yml"
   with_first_found:
     - files:
-        - "{{ filename }}.j2"
+        - "{{ prometheus_yaml_file }}.j2"
       paths:
         - "{{ playbook_dir }}/templates/"
         - "{{ playbook_dir }}/templates/{{ role_name }}"
@@ -31,18 +29,11 @@
     - check configure files
     - reload prometheus service
 
-- name: search files in templates/rules folder
-  find:
-    paths:
-      - "{{ role_path }}/templates/rules"
-      - "{{ playbook_dir }}/templates/{{ role_name }}/rules"
-  register: rules
-
 - name: copy rules files
   template:
-    src: "{{ item.path }}"
-    dest: "{{ prometheus_etc_path }}/rules/{{ (item.path|basename|splitext)[0] }}"
-  with_items: "{{ rules.files }}"
+    src: "{{ item }}"
+    dest: "{{ prometheus_etc_path }}/rules/{{ item|basename }}"
+  with_items: "{{ prometheus_rule_files }}"
   notify:
     - check configure rules
     - reload prometheus service

@@ -1,7 +1,7 @@
 ---
 - name: check configure files
   docker_container:
-    name: prometheus_check_config
+    name: "{{ prometheus_container_name }}_check_config"
     image: "{{ prometheus_image_fullname }}"
     entrypoint:
       - /bin/promtool
@@ -17,14 +17,14 @@
 
 - name: check configure rules
   docker_container:
-    name: prometheus_check_rules
+    name: "{{ prometheus_container_name }}_check_rules"
     image: "{{ prometheus_image_fullname }}"
     entrypoint:
       - /bin/promtool
     command:
       - check
       - rules
-      - /etc/prometheus/rules/*
+      - /etc/prometheus/rules/*.yml
     detach: false
     volume:
       - /etc/localtime:/etc/localtime:ro
@@ -33,11 +33,11 @@
 
 - name: restart prometheus service
   docker_container:
-    name: prometheus
+    name: "{{ prometheus_container_name }}"
     restart: true
 
 - name: reload prometheus service
   docker_container:
-    name: prometheus
+    name: "{{ prometheus_container_name }}"
     force_kill: true
     kill_signal: SIGHUP

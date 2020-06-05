@@ -19,4 +19,4 @@ jobs:
       - name: Run ansible deployment playbooks
         run: |
           #!/bin/bash
-          sudo -E ansible-playbook -i localhost, -c local -b tests/config.yml
+          sudo -E ansible-playbook -i localhost, -c local -b tests/github-config.yml
