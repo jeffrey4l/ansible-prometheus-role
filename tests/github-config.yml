@@ -1,6 +1,10 @@
 ---
 - hosts: all
   tasks:
+    - name: install netaddr
+      package:
+        name: python-netaddr
+
     - name: setup docker serivce
       import_role:
         name: geerlingguy.docker
@@ -12,3 +16,8 @@
     - name: start prometheus service
       import_role:
         name: prometheus
+
+    - name: destroy prometheus service
+      import_role:
+        name: prometheus
+        tasks_from: destroy.yml

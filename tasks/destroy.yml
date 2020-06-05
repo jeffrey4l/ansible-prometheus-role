@@ -4,5 +4,27 @@
     name: "{{ item }}"
     state: absent
   with_items:
-    - prometheus_check_config
-    - prometheus_check_rules
+    - "{{ prometheus_container_name }}"
+    - "{{ prometheus_container_name }}_check_rules"
+    - "{{ prometheus_container_name }}_check_config"
+
+- name: remove prometheus etc folder
+  file:
+    path: "{{ prometheus_etc_path }}"
+    state: absent
+
+- name: remove prometheus data folder
+  file:
+    path: "{{ prometheus_data_path }}"
+    state: absent
+  when:
+    - prometheus_destroy_all | bool
+    - prometheus_data_path.startswith('/')
+
+- name: remove prometheus docker volume
+  docker_volume:
+    name: "{{ prometheus_data_path }}"
+    state: absent
+  when:
+    - prometheus_destroy_all | bool
+    - not prometheus_data_path.startswith('/')

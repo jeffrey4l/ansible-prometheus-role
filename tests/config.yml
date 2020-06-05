@@ -4,3 +4,8 @@
     - name: start prometheus service
       import_role:
         name: prometheus
+
+    - name: start prometheus service
+      import_role:
+        name: prometheus
+        tasks_from: destroy.yml

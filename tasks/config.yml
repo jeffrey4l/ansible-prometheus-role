@@ -13,6 +13,8 @@
     path: "{{ prometheus_data_path }}"
     recurse: true
     state: directory
+  when:
+    - prometheus_data_path.startswith('/')
 
 - name: copy prometheus.yml file
   template:
